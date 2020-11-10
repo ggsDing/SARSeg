@@ -71,11 +71,10 @@ def copy_weight(model, model_copy):
     for i in range(0, n):
         mp[i].data[:] = mcp[i].data[:]
 
-class MSResNet(nn.Module):
+class MPResNet(nn.Module):
     def __init__(self, in_channels=3, num_classes=7):
-        super(MSResNet, self).__init__()
+        super(MPResNet, self).__init__()
         self.FCN = FCN(in_channels, num_classes, pretrained=False)
-        #self.SA = Spatial_AttentionV2(128, reduction=8, pool_window=10, add_input=False)
         
         self.res1 = models.resnet34(pretrained=False).layer3
         self.res2 = models.resnet34(pretrained=False).layer4
