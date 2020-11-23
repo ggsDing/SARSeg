@@ -1,7 +1,6 @@
 import torch
 import numpy as np
 import torch.nn as nn
-from utils.misc import initialize_weights
 from torchvision import models
 from torch.nn import functional as F
 
@@ -62,9 +61,9 @@ class DecoderBlock(nn.Module):
         x = self.relu(x)
         return x
 
-class MSResNet(nn.Module):
+class MPResNet(nn.Module):
     def __init__(self, in_channels=3, num_classes=7):
-        super(MSResNet, self).__init__()
+        super(MPResNet, self).__init__()
         self.FCN = FCN_res34(in_channels, num_classes, pretrained=True)
         
         self.res1 = models.resnet34(pretrained=True).layer3
@@ -78,8 +77,6 @@ class MSResNet(nn.Module):
         
         self.classifier = nn.Sequential( conv1x1(512, 128), nn.BatchNorm2d(128), nn.ReLU(), conv1x1(128, num_classes, bias=True) )
         self.classifier_aux = nn.Sequential( conv1x1(512, 128), nn.BatchNorm2d(128), nn.ReLU(), conv1x1(128, num_classes, bias=True) )
-            
-        initialize_weights(self.dec4, self.dec3, self.classifier, self.classifier_aux)
         
     def forward(self, x):
         x_size = x.size()
