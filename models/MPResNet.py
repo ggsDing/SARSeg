@@ -31,10 +31,6 @@ class FCN_res34(nn.Module):
             if 'conv1' in n or 'downsample.0' in n:
                 m.stride = (1, 1)
 
-        self.head = nn.Sequential(conv1x1(512, 128), nn.BatchNorm2d(128), nn.ReLU())
-        
-        self.classifier = nn.Sequential(conv1x1(128, 128, bias=True), nn.BatchNorm2d(128), nn.ReLU(), conv1x1(128, num_classes, bias=True))
-
 class DecoderBlock(nn.Module):
     def __init__(self, in_channels, n_filters):
         super(DecoderBlock,self).__init__()
