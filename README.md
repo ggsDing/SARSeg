@@ -3,4 +3,3 @@ pytorch codes for the paper ['MP-ResNet: Multi-path Residual Network for the Sem
 
 ![alt text](https://github.com/ggsDing/SARSeg/blob/main/FlowChart.png)
 
-training and evaluation codes to be updated later
