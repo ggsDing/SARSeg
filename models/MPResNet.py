@@ -94,5 +94,5 @@ class MPResNet(nn.Module):
         
         out = self.classifier(d2)
         
-        # recommended weights for loss function: 0.3*aux_loss + 0.7*main_loss
-        return F.upsample(aux, x_size[2:], mode='bilinear'), F.upsample(out, x_size[2:], mode='bilinear')
+        # recommended weights for loss function: 0.7*main_loss + 0.3*aux_loss
+        return F.upsample(out, x_size[2:], mode='bilinear'), F.upsample(aux, x_size[2:], mode='bilinear')
